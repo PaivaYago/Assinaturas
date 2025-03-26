@@ -71,7 +71,7 @@ public class AssinaturaService {
 				.flatMap(usuario -> assinaturaRepository.findByUsuarioAndStatus(usuario, StatusAssinatura.ATIVA));
 	}
 
-	@Scheduled(cron = "* * * * * *") // Executa diariamente à meia-noite
+	@Scheduled(cron = "0 0 * * * *") // Executa diariamente à meia-noite
 	@CacheEvict(value = "assinaturas", allEntries = true)
 	public void renovarAssinaturas() {
 		logger.info("Iniciando processo de renovação de assinaturas");

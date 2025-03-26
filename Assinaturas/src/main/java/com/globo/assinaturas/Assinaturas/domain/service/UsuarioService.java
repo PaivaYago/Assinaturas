@@ -1,6 +1,7 @@
 package com.globo.assinaturas.Assinaturas.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.globo.assinaturas.Assinaturas.domain.model.Usuario;
@@ -35,6 +36,10 @@ public class UsuarioService {
 
     public boolean usuarioExiste(UUID id) {
         return usuarioRepository.existsById(id);
+    }
+    
+    public Usuario getUsuarioByEmail(String email) {
+    	return usuarioRepository.findByEmail(email);
     }
 }
 

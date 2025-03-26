@@ -1,20 +1,11 @@
-# Construção da aplicação
-FROM openjdk:17-jdk-slim as build
-
-# Diretório de trabalho dentro do container
-WORKDIR /app
-
-# Copiar o arquivo JAR da aplicação para o container
-COPY target/Assinaturas-0.0.1-SNAPSHOT.jar app.jar
-
-# Etapa 2: Execução da aplicação
+# Usa uma imagem base do Java 17
 FROM openjdk:17-jdk-slim
 
-# Copiar o arquivo JAR do estágio de construção
-COPY --from=build /app/app.jar /app.jar
+# Copia o arquivo JAR da aplicação para o container
+COPY target/*.jar app.jar
 
-# Comando para iniciar a aplicação
-CMD ["java", "-jar", "/app.jar"]
-
-# Expõe a porta para a aplicação
+# Expõe a porta que a aplicação usa
 EXPOSE 8080
+
+# Comando para executar a aplicação
+CMD ["java", "-jar", "app.jar"]
