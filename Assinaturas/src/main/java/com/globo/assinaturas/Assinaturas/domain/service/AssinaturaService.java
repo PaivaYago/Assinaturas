@@ -131,7 +131,7 @@ public class AssinaturaService {
 		logger.info("Assinatura cancelada com sucesso para usuário: {}", usuarioId);
 	}
 
-	private boolean processarPagamento(Assinatura assinatura) {
+	boolean processarPagamento(Assinatura assinatura) {
 		boolean sucesso = Math.random() > 0.2;
 		logger.info("Processando pagamento para assinatura: {} - Sucesso: {}", assinatura.getId(), sucesso);
 		return sucesso;
