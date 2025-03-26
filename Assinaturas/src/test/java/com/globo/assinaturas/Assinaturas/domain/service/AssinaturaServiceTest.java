@@ -190,7 +190,5 @@ public class AssinaturaServiceTest {
 	@Test
 	void processarNotificacao_processaMensagem() {
 		assinaturaService.processarNotificacao("Mensagem de teste");
-		// Verifica se o método processarNotificacao foi chamado (pode ser necessário
-		// adicionar mais verificações dependendo da implementação real)
 	}
 }
