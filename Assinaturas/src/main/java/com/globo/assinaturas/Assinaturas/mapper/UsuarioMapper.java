@@ -13,7 +13,7 @@ public class UsuarioMapper {
 			return null;
 		}
 
-		return UsuarioDTO.builder().id(usuario.getId()).nome(usuario.getNome()).email(usuario.getEmail()).build();
+		return UsuarioDTO.builder().id(usuario.getId()).nome(usuario.getNome()).email(usuario.getEmail()).senha(usuario.getSenha()).build();
 	}
 
 	public Usuario toEntity(UsuarioDTO usuarioDTO) {
@@ -25,7 +25,9 @@ public class UsuarioMapper {
 		usuario.setId(usuarioDTO.getId());
 		usuario.setNome(usuarioDTO.getNome());
 		usuario.setEmail(usuarioDTO.getEmail());
+		usuario.setSenha(usuarioDTO.getSenha());
 
 		return usuario;
 	}
+	
 }

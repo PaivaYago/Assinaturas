@@ -114,9 +114,15 @@ public class AssinaturaServiceTest {
 		when(assinaturaRepository.findByDataExpiracaoAndStatus(LocalDate.now(), StatusAssinatura.ATIVA))
 				.thenReturn(assinaturasExpirando);
 
-		assinaturaService.renovarAssinaturas();
+		// Simula sucesso no pagamento
+		AssinaturaService assinaturaServiceSpy = spy(assinaturaService);
+		doReturn(true).when(assinaturaServiceSpy).processarPagamento(any(Assinatura.class));
+
+		assinaturaServiceSpy.renovarAssinaturas();
 
 		assertEquals(0, assinatura.getTentativasPagamento());
+		assertEquals(LocalDate.now().plusMonths(1), assinatura.getDataExpiracao()); // Verifica se a data de expiração foi atualizada
+		assertEquals(StatusAssinatura.ATIVA, assinatura.getStatus()); // Verifica se o status permanece ativo
 	}
 
 	@Test

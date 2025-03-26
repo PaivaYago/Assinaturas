@@ -37,25 +37,39 @@ public class UsuarioControllerTest {
 
     @BeforeEach
     void setUp() {
-
         usuario = new Usuario();
         usuarioId = UUID.randomUUID();
         usuario.setId(usuarioId);
-        
-        usuarioDTO = usuarioMapper.toDTO(usuario);
+
+        usuarioDTO = UsuarioDTO.builder()
+                .email("test@example.com")
+                .senha("senha123")
+                .build();
     }
 
     @Test
     void criarUsuario_usuarioCriadoComSucesso() {
+        when(usuarioService.getUsuarioByEmail(usuarioDTO.getEmail())).thenReturn(null);
         when(usuarioMapper.toEntity(usuarioDTO)).thenReturn(usuario);
         when(usuarioService.criarUsuario(usuario)).thenReturn(usuario);
         when(usuarioMapper.toDTO(usuario)).thenReturn(usuarioDTO);
 
-        ResponseEntity<UsuarioDTO> response = usuarioController.criarUsuario(usuarioDTO);
+        ResponseEntity<?> response = usuarioController.criarUsuario(usuarioDTO);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(usuarioDTO, response.getBody());
+        assertEquals(usuarioDTO.getEmail(), ((UsuarioDTO) response.getBody()).getEmail());
+        assertEquals(usuarioDTO.getSenha(), ((UsuarioDTO) response.getBody()).getSenha());
         verify(usuarioService, times(1)).criarUsuario(usuario);
+    }
+
+    @Test
+    void criarUsuario_emailJaCadastrado() {
+        when(usuarioService.getUsuarioByEmail(usuarioDTO.getEmail())).thenReturn(usuario);
+
+        ResponseEntity<?> response = usuarioController.criarUsuario(usuarioDTO);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals("E-mail já cadastro para outro usuário", response.getBody());
     }
 
     @Test
@@ -66,8 +80,17 @@ public class UsuarioControllerTest {
         ResponseEntity<UsuarioDTO> response = usuarioController.buscarUsuarioPorId(usuarioId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(usuarioDTO, response.getBody());
+        assertEquals(usuarioDTO.getEmail(), response.getBody().getEmail());
+        assertEquals(usuarioDTO.getSenha(), response.getBody().getSenha());
         verify(usuarioService, times(1)).getUsuarioById(usuarioId);
     }
-}
 
+    @Test
+    void buscarUsuarioPorId_usuarioNaoEncontrado() {
+        when(usuarioService.getUsuarioById(usuarioId)).thenReturn(Optional.empty());
+
+        ResponseEntity<UsuarioDTO> response = usuarioController.buscarUsuarioPorId(usuarioId);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+}

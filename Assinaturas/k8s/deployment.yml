@@ -1,0 +1,19 @@
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: assinaturas-deployment
+#spec:
+#  replicas: 3
+#  selector:
+#    matchLabels:
+#      app: Assinaturas
+#  template:
+#    metadata:
+#      labels:
+#        app: Assinaturas
+#    spec:
+#      containers:
+#      - name: sua-aplicacao-container
+#        image: gcr.io/assinaturas-454904/app.jar:v1
+#        ports:
+#        - containerPort: 8080
