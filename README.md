@@ -10,7 +10,7 @@
 </p>
 
 
-<p dir="auto">Este é um projeto construído utilizando <strong>Java com Spring, PostgresSQL como banco de dados, Spring Security e JWT para autenticação</strong>strong>. Além disso possui um banco em memória <strong>Redis</strong> para otimizar as consultas de dados e comunicação assíncrona utilizando <strong>RabbitMQ</strong>. O projeto está conteinerizado usando <strong>Docker</strong>. Os testes unitários são feitos com <strong>JUnit e Mockito</strong>. O software está documentado através do <strong>Swagger</strong>.</p>
+<p dir="auto">Este é um projeto construído utilizando <strong>Java com Spring, PostgresSQL como banco de dados, Spring Security e JWT para autenticação</strong>. Além disso possui um banco em memória <strong>Redis</strong> para otimizar as consultas de dados e comunicação assíncrona utilizando <strong>RabbitMQ</strong>. O projeto está conteinerizado usando <strong>Docker</strong>. Os testes unitários são feitos com <strong>JUnit e Mockito</strong>. O software está documentado através do <strong>Swagger</strong>.</p>
 
 <p dir="auto">O objetivo da API é realizar um controle de Usuários que se cadastram e Assinam planos de um streaming.</p>
 
