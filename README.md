@@ -28,6 +28,7 @@
 "dataExpiracao":"2025-04-10",
 "status":"ATIVA"
 }
+
 • O plano pode ser:
 o BASICO - R$ 19,90/mês
 o PREMIUM - R$ 39,90/mês
