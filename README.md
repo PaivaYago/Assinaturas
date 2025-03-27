@@ -51,7 +51,7 @@ https://github.com/PaivaYago/Assinaturas.git
 
 2- Intalar as dependêcia com o Maven;
 
-3- Instalar o Oracle;
+3- Instalar o PostgreSQL;
 
 4- Instalar o RabbitMQ;
 
